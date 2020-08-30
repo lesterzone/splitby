@@ -25,6 +25,22 @@ To find all the methods in a given folder of ruby files
 
 # Usage
 
-```
+```sh
+# with binary
 splitby -h
+
+# without binary
+go run *.go -h
+```
+
+# build
+
+```sh
+go build -ldflags "-s -w"
+```
+
+# install
+
+```
+go install
 ```

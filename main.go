@@ -23,19 +23,19 @@ func main() {
 
 	for scanner.Scan() {
 		text := scanner.Text()
-		if !strings.Contains(text, *spliter) {
+		// only append to the storage if we have our first line.
+		// which represents the first time we find the spliter
+		if !strings.Contains(text, *spliter) && len(storage) >= 1 {
 			// append text to storage so we can print it later when we have
 			// the next occurence
 			storage = append(storage, text)
 		}
 
 		if strings.Contains(text, *spliter) {
-			// let's print line only if we have content in the storage
-			if len(storage) > 0 {
-				logger.Println(strings.Join(storage, *joiner) + *separator)
-				// reset storage with found text
-				storage = []string{text}
-			}
+			// let's print line, we have found the next occurence
+			logger.Println(strings.Join(storage, *joiner) + *separator)
+			// let's reset storage
+			storage = []string{text}
 		}
 	}
 }
